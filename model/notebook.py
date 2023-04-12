@@ -3,7 +3,7 @@ from datetime import datetime
 
 from tabulate import tabulate
 
-from note import Note
+from .note import Note
 
 
 class Notebook:
