@@ -1,11 +1,10 @@
 """Модуль, реализующий команду CommandSave"""
-from view.commands.command_abstract import Command
+from .command_abstract import Command
 
 
 class CommandSave(Command):
     """Данный класс реализует выполнения команды - сохранение изменений в записной книжке в файл"""
 
-    @property
     def description(self):
         """Возвращает описание команды"""
         return "Сохранить изменения"

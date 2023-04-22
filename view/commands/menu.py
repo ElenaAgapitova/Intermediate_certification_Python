@@ -28,7 +28,7 @@ class Menu:
         """Возвращает строковое представление меню"""
         menu_string = "\n======== Главное меню ========\n"
         for i, cmd in enumerate(self.commands, start=1):
-            menu_string += f"\t{i}. {cmd.description}\n"
+            menu_string += f"\t{i}. {cmd.description()}\n"
         return menu_string
 
     def get_size_menu(self):
