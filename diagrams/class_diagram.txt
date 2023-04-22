@@ -1,0 +1,44 @@
+@startuml
+
+package "model" {
+   class Note
+   class Notebook
+   class FileManager
+   Notebook o-- Note
+   FileManager .. Notebook
+   FileManager .. Note
+}
+
+
+package "view"{
+  abstract class View
+  class Console
+  package "commands" {
+    abstract class Command
+    class Menu
+    Menu o-- Command
+  }
+  View <|-- Console
+  Menu --* Console
+  Command ..> Console
+}
+
+package "presenter" {
+   class Presenter
+   Presenter ..> Notebook
+   Presenter ..> Console
+}
+
+note right of Command
+  There are subclasses:
+   - CommandOpen
+   - CommandShowAll
+   - CommandFilter
+   - CommandAdd
+   - CommandRemove
+   - CommandChange
+   - CommandSave
+   - CommandExit
+  See the "class_command_diagram" for details.
+end note
+@enduml
