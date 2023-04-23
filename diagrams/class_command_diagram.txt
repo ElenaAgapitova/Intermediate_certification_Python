@@ -1,0 +1,54 @@
+@startuml
+abstract class Command {
++console: Console
++__init__()
+{abstract} description()
+{abstract} execute()
+}
+
+class CommandOpen {
++description()
++execute()
+}
+class CommandShowAll {
++description()
++execute()
+}
+
+class CommandFilter {
++description()
++execute()
+}
+class CommandAdd {
++description()
++execute()
+}
+class CommandChange 
+{
++description()
++execute()
+}
+class CommandRemove {
++description()
++execute()
+}
+class CommandSave {
++description()
++execute()
+}
+class CommandExit {
++description()
++execute()
+}
+
+
+Command <|-up- CommandExit
+Command <|-- CommandShowAll
+Command <|-- CommandFilter
+Command <|-left- CommandAdd
+Command <|-- CommandChange
+Command <|-right- CommandRemove
+Command <|-up- CommandSave
+Command <|-up- CommandOpen
+
+@enduml

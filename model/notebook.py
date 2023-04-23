@@ -33,16 +33,16 @@ class Notebook:
         """Возвращает длину записной книжки"""
         return len(self.__notes)
 
-    def add_note(self, title, text_note):
+    def add_note(self, title: str, text_note: str):
         """Добавление заметки в записную книжку"""
         note = Note(title, datetime.today().strftime('%d.%m.%Y %H:%M'), text_note)
         self.__notes.append(note)
 
-    def remove_note(self, index):
+    def remove_note(self, index: int):
         """Удаление заметки из книжки"""
         del self.__notes[index]
 
-    def change_note(self, index, title, update_text):
+    def change_note(self, index: int, title: str, update_text: str):
         """Редактирование заметки в книжке"""
         self.__notes[index].change(title, update_text)
 
@@ -66,7 +66,7 @@ class Notebook:
                 for i, note in enumerate(self.__notes, start=1)]
         return tabulate(tabl, headers=headers, tablefmt="fancy_grid", stralign='center')
 
-    def filter_by_date(self, date):
+    def filter_by_date(self, date: str):
         """
         Фильтрует заметки по дате, формирует представление записной книжки в виде таблицы.
         :param date: дата, по которой необходимо сделать выборку заметок.

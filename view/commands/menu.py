@@ -35,7 +35,7 @@ class Menu:
         """Возвращает длину списка меню"""
         return len(self.commands)
 
-    def execute(self, index):
+    def execute(self, index: int):
         """Запускает метод в зависимости от выбора пользователя по индексу команды в списке"""
         option = self.commands[index]
         option.execute()

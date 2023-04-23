@@ -1,35 +1,109 @@
 @startuml
 
 package "model" {
-   class Note
-   class Notebook
-   class FileManager
-   Notebook o-- Note
-   FileManager .. Notebook
-   FileManager .. Note
+   class Note {
+     -title: str
+     -text_note: str
+     -creation_data: str
+     -changes_data: str
+     +__init__()
+     +get_title()
+     +get_creation_data()
+     +get_changes_data()
+     +get_text_note()
+     +change(title: str, new_text: str)
+}
+   class Notebook {
+   -notes: list
+    +__init__()
+    +get_notes()
+    +add_note(title: str, text_note: str)
+    +size()
+    +remove_note(index: int)
+    +change_note(index: int, title: str, update_text: str)
+    +is_full()
+    +tabl()
+    +filter_by_date(date: str) 
+
+}
+   class FileManager {
+   +path: str
+   +__init__()
+   +file_read(notebook: Notebook)
+   +file_write(notebook: Notebook)
+
+}
+   Notebook o-[bold]- Note
+   FileManager -[#blue,dashed,thickness=2]- Notebook
+   FileManager -[#blue,dashed,thickness=2]- Note
 }
 
 
 package "view"{
-  abstract class View
-  class Console
+  abstract class View {
+  {abstract} set_presenter(presenter: Presenter)
+  {abstract} start()
+}
+  class Console  {
+  -working: bool                  
+  -save: bool                     
+  -open: bool                     
+  +presenter: Presenter
+  +__init__()
+  {static} -get_index(size: int, text: str)
+  +set_presenter(presenter: Presenter)
+  +open_notebook()
+  +show_all()
+  +show_filtered_notebook()
+  +remove_note()
+  +change_note()
+  +add_note()
+  +finish()
+  +save_changes()
+  +start()
+}
   package "commands" {
-    abstract class Command
-    class Menu
-    Menu o-- Command
+    abstract class Command {
++console: Console
+__init__()
+{abstract} description()
+{abstract} execute()
+}
+    class Menu {
+  +commands: list
+  +__init__()
+  +__str__()
+  +get_size_menu()
+  +execute()
+}
+    Menu o-[bold]- Command
   }
-  View <|-- Console
-  Menu --* Console
-  Command ..> Console
+  View <|-[#green,bold]- Console
+  Menu -[bold]-* Console
+  Command -[#red,dashed,thickness=3]-> Console
 }
 
 package "presenter" {
-   class Presenter
-   Presenter ..> Notebook
-   Presenter ..> Console
+   class Presenter {
+   +view: View
+   +notebook: Notebook
+   +path: str
+   +__init__()
+   +open_file()
+   +save()
+   +is_full()
+   +add_note(title_text: str, text_note: str)
+   +remove_note(index: int)
+   +change_note(index: int, update_title: str, update_text: str)
+   +get_size_notebook()
+   +get_tabl_notebook()
+   +get_filtered_tabl()
+}
+   Presenter -[#red,dashed,thickness=3]-> Notebook
+   Presenter -[#red,dashed,thickness=3]-> View
 }
 
-note right of Command
+note left of Command
   There are subclasses:
    - CommandOpen
    - CommandShowAll

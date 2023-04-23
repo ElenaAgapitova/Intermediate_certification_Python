@@ -20,7 +20,7 @@ class Note:
         5. change: изменение заметки.
     """
 
-    def __init__(self, title, creation_data, text_note, changes_data=''):
+    def __init__(self, title: str, creation_data: str, text_note: str, changes_data: str = ''):
         self.__title = title
         self.__text_note = text_note
         self.__creation_data = creation_data

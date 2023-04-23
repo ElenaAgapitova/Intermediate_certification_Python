@@ -129,7 +129,7 @@ class Console(View):
             menu.execute(index)
 
     @staticmethod
-    def __get_index(size, text):
+    def __get_index(size: int, text: str):
         """Возвращает индекс для списка заметок или меню"""
         while True:
             user_input = input(text)
